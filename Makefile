@@ -4,7 +4,7 @@ CC     = cc
 CFLAGS = -ansi -pedantic -Wall -Wextra -O3 -g3
 PREFIX = /usr/local
 
-sources = src/sha256.c
+sources = src/main_test.c src/sha256.c
 objects = $(sources:.c=.o)
 headers = config.h src/sha256.h
 
