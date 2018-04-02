@@ -8,7 +8,7 @@ sources = src/main_test.c src/sha256.c
 objects = $(sources:.c=.o)
 headers = config.h src/sha256.h
 
-enchive: $(objects)
+encrypt: $(objects)
 	$(CC) $(LDFLAGS) -o $@ $(objects) $(LDLIBS)
 
 src/sha256.o: src/sha256.c config.h
@@ -21,9 +21,8 @@ src/sha256.o: src/sha256.c config.h
 clean:
 	rm -f encrypt $(objects)
 
-install: enchive
-	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f encrypt $(DESTDIR)$(PREFIX)/bin
+install: encrypt
+
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/encrypt
