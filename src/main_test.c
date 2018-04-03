@@ -41,7 +41,7 @@ main(int argc, char **argv)
         for (j; j < 1000; j++) {
             int i =0;
             for(i;i<100;i++);
-            generateSalt(1);
+            generateSalt(20);
         }
     }
     return 0;

@@ -183,6 +183,11 @@ void generateSalt(int len){
 	clock_gettime(CLOCK_MONOTONIC, &ctime);
 	printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);
 	srand((unsigned)ctime.tv_nsec);
-	int i =rand();
-	printf("random:%d\n",i);
+	int random =rand();
+	u8 buf[len]={0};
+	u8 format[10];
+	sprintf(format,"%s0%dd","%",len);
+	printf("format:%s",format);
+	sprintf(buf,format,random);
+	printf("random:%d\n",random);
 }
