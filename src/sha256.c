@@ -178,7 +178,7 @@ int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen){
     return 0;
 }
 
-void generateSalt(u8 salt[],int len){
+void generateSalt(u8 salt[],size_t len){
 	struct timespec ctime = {0, 0};
 	clock_gettime(CLOCK_MONOTONIC, &ctime);
 	printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);

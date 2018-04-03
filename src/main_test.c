@@ -41,7 +41,8 @@ main(int argc, char **argv)
         for (j; j < 1000; j++) {
             int i =0;
             for(i;i<100;i++);
-            generateSalt(20);
+            u8 salt[SHA256_SALT_SIZE];
+            generateSalt(salt, sizeof(salt));
         }
     }
     return 0;
