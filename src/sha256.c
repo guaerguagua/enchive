@@ -184,14 +184,14 @@ int generateSalt(u8 salt[],size_t len){
 	}
 	struct timespec ctime = {0, 0};
 	clock_gettime(CLOCK_MONOTONIC, &ctime);
-	printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);
+	//printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);
 	srand((unsigned)ctime.tv_nsec);
 	int random =rand();
 	u8 buf[SHA256_SALT_SIZE+1]={0};
 	u8 format[10]="%032d";
-	printf("format:%s",format);
+	//printf("format:%s\n",format);
 	sprintf(buf,format,random);
-	printf("random:%d\n",random);
+	//printf("random:%d\n",random);
 	memcpy(salt,buf,sizeof(buf));
 	return 0;
 }
