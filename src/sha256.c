@@ -1,8 +1,6 @@
 /*********************************************************************
 * Filename:   sha256.c
-* Author:     Brad Conte (brad AT bradconte.com)
-* Copyright:  Public Domain
-* Disclaimer: This code is presented "as is" without any guarantees.
+* Author:     yangzhiwei
 * Details:    Implementation of the SHA-256 hashing algorithm.
               SHA-256 is one of the three algorithms in the SHA2
               specification. The others, SHA-384 and SHA-512, are not
@@ -13,8 +11,6 @@
 *********************************************************************/
 
 /*************************** HEADER FILES ***************************/
-#include <stdlib.h>
-#include <string.h>
 #include "sha256.h"
 
 /****************************** MACROS ******************************/
@@ -155,4 +151,39 @@ void sha256_final(SHA256_CTX *ctx, u8 hash[])
 		hash[i + 24] = (ctx->state[6] >> (24 - i * 8)) & 0x000000ff;
 		hash[i + 28] = (ctx->state[7] >> (24 - i * 8)) & 0x000000ff;
 	}
+}
+
+/**@return 0:success calculate sha256;-1:hashLen is illegal;-2:srcLen is illegal
+ * */
+int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen){
+	if(hashLen!=SHA256_BLOCK_SIZE*2){
+		return -1;
+	}
+	if(srcLen==0){
+		return -2;
+	}
+    SHA256_CTX ctx;
+    u8 m[SHA256_BLOCK_SIZE];
+    memset(m,0,sizeof(m));
+
+    sha256_init(&ctx);
+    sha256_update(&ctx,src,srcLen);
+    sha256_final(&ctx,m);
+    u8 buf[3]={0};
+    int i=0;
+    for(i;i<SHA256_BLOCK_SIZE;i++){
+        sprintf(buf,"%02x",m[i]);
+        memcpy(hash+i*2,buf,sizeof(buf));
+    }
+    return 0;
+}
+
+void generateSalt(int len){
+	long ctime=clock();
+
+	printf("current time:%d\n",ctime);
+	srand((unsigned)clock());
+
+	int i =rand();
+	printf("random:%d\n",i);
 }
