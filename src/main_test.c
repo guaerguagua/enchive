@@ -37,14 +37,12 @@ main(int argc, char **argv)
         sha256(in, inLen, out, sizeof(out)-1);
         printf("out string:%s\n", out);
         printf("out    len:%d\n", strlen(out)-1);
-        int j = 0;
-        for (j; j < 1000; j++) {
-            int i =0;
-            for(i;i<100;i++);
-            u8 salt[SHA256_SALT_SIZE+1]={0};
-            generateSalt(salt, sizeof(salt)-1);
-            printf("salt:%s\nsalt len:%d\n",salt, sizeof(salt)-1);
-        }
+        u8 salt[SHA256_SALT_SIZE+1]={0};
+        generateSalt(salt, sizeof(salt)-1);
+        printf("salt:%s\nsalt len:%d\n",salt, sizeof(salt)-1);
+        sha256_salt(in,inLen,out,sizeof(out)-1,salt,sizeof(salt)-1);
+        printf("out string with salt:%s",out);
+
     }
     return 0;
 }

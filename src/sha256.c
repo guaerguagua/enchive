@@ -178,8 +178,10 @@ int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen){
     return 0;
 }
 
-int generateSalt(u8 salt[],size_t len){
-	if(len!=SHA256_SALT_SIZE){
+/**@return 0:success calculate salt;-1:saltLen is illegal
+ * */
+int generateSalt(u8 salt[],size_t saltLen){
+	if(saltLen!=SHA256_SALT_SIZE){
 		return -1;
 	}
 	struct timespec ctime = {0, 0};
@@ -193,5 +195,26 @@ int generateSalt(u8 salt[],size_t len){
 	sprintf(buf,format,random);
 	//printf("random:%d\n",random);
 	memcpy(salt,buf,sizeof(buf));
+	return 0;
+}
+
+/**@return 0:success calculate sha256 with salt;-1:hashLen is illegal;-2:srcLen is illegal;-3:saltLen is illegal
+ * */
+int sha256_salt(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen,const u8 salt[],size_t saltLen){
+	if(hashLen!=SHA256_BLOCK_SIZE*2){
+		return -1;
+	}
+	if(srcLen==0){
+		return -2;
+	}
+	if(saltLen!=SHA256_SALT_SIZE){
+		return -3;
+	}
+	int tempLen = srcLen+saltLen;
+	u8 temp[tempLen];
+	memset(temp,0,tempLen);
+	memcpy(temp,src,srcLen);
+	memcpy(temp+srcLen,salt,saltLen);
+	sha256(temp,tempLen,hash,hashLen);
 	return 0;
 }

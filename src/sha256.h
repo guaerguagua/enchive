@@ -46,5 +46,7 @@ void sha256_final(SHA256_CTX *ctx, u8 hash[]);
 int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen);
 
 int generateSalt(u8 salt[],size_t len);
+
+int sha256_salt(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen,const u8 salt[],size_t saltLen)
 #endif /* SHA256_H */
 
