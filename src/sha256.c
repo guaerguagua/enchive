@@ -187,7 +187,7 @@ int generateSalt(u8 salt[],size_t len){
 	printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);
 	srand((unsigned)ctime.tv_nsec);
 	int random =rand();
-	u8 buf[SHA256_SALT_SIZE]={0};
+	u8 buf[SHA256_SALT_SIZE+1]={0};
 	u8 format[10]="%032d";
 	printf("format:%s",format);
 	sprintf(buf,format,random);
