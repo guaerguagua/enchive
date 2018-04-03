@@ -19,9 +19,6 @@
 #define SHA256_BLOCK_SIZE 32
 #define SHA256_SALT_SIZE 32
 
-#define CONN2(x,y) x##y;
-#define CONN3(x,y,z) x##CONN2(y,z);
-
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
