@@ -179,11 +179,10 @@ int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen){
 }
 
 void generateSalt(int len){
-	long ctime=clock();
-
-	printf("current time:%d\n",ctime);
-	srand((unsigned)clock());
-
+	struct timespec ctime = {0, 0};
+	clock_gettime(CLOCK_MONOTONIC, &ctime);
+	printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);
+	srand((unsigned)ctime.tv_nsec);
 	int i =rand();
 	printf("random:%d\n",i);
 }

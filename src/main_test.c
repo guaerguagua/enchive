@@ -11,6 +11,7 @@
 int
 main(int argc, char **argv)
 {
+    /**
     struct timespec time1 = {0, 0};
     clock_gettime(CLOCK_REALTIME, &time1);
     printf("CLOCK_REALTIME: %d, %d\n", time1.tv_sec, time1.tv_nsec);
@@ -22,6 +23,7 @@ main(int argc, char **argv)
     printf("CLOCK_THREAD_CPUTIME_ID: %d, %d\n", time1.tv_sec, time1.tv_nsec);
     printf("%d\n", time(NULL));
     sleep(1);
+    **/
 
     printf("start test sha256\n");
     u8 in[100];
