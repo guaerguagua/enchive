@@ -27,23 +27,23 @@ main(int argc, char **argv)
 
     printf("start test sha256\n");
     u8 in[100];
-    u8 out[SHA256_BLOCK_SIZE*2];
+    u8 out[SHA256_BLOCK_SIZE*2+1];
     while(1) {
         printf("please input a string:\n");
         scanf("%s", in);
         printf("in  string:%s\n", in);
         int inLen = strlen(in);
         printf("in     len:%d\n", inLen);
-        sha256(in, inLen, out, sizeof(out));
+        sha256(in, inLen, out, sizeof(out)-1);
         printf("out string:%s\n", out);
-        printf("out    len:%d\n", strlen(out));
+        printf("out    len:%d\n", strlen(out)-1);
         int j = 0;
         for (j; j < 1000; j++) {
             int i =0;
             for(i;i<100;i++);
-            u8 salt[SHA256_SALT_SIZE];
-            generateSalt(salt, sizeof(salt));
-            printf("salt:%s\nsalt len:%d\n",salt, sizeof(salt));
+            u8 salt[SHA256_SALT_SIZE+1]={0};
+            generateSalt(salt, sizeof(salt)-1);
+            printf("salt:%s\nsalt len:%d\n",salt, sizeof(salt)-1);
         }
     }
     return 0;
