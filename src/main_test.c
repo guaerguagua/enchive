@@ -43,6 +43,7 @@ main(int argc, char **argv)
             for(i;i<100;i++);
             u8 salt[SHA256_SALT_SIZE];
             generateSalt(salt, sizeof(salt));
+            printf("salt:%s\nsalt len:%d\n",salt, sizeof(salt));
         }
     }
     return 0;

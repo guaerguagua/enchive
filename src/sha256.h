@@ -19,7 +19,8 @@
 #define SHA256_BLOCK_SIZE 32
 #define SHA256_SALT_SIZE 32
 
-#define CONN(x,y,z) x##y##z
+#define CONN2(x,y) x##y;
+#define CONN3(x,y,z) x##CONN2(y,z);
 
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -44,6 +45,6 @@ void sha256_final(SHA256_CTX *ctx, u8 hash[]);
 
 int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen);
 
-void generateSalt(u8 salt[],size_t len);
+int generateSalt(u8 salt[],size_t len);
 #endif /* SHA256_H */
 
