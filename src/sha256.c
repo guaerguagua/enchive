@@ -178,15 +178,14 @@ int sha256(const u8 src[],size_t srcLen,u8 hash[],size_t hashLen){
     return 0;
 }
 
-void generateSalt(int len){
+void generateSalt(u8 salt[],int len){
 	struct timespec ctime = {0, 0};
 	clock_gettime(CLOCK_MONOTONIC, &ctime);
 	printf("CLOCK_MONOTONIC: %d, %d\n", ctime.tv_sec, ctime.tv_nsec);
 	srand((unsigned)ctime.tv_nsec);
 	int random =rand();
-	u8 buf[len]={0};
-	u8 format[10];
-	sprintf(format,"%s0%dd","%",len);
+	u8 buf[SHA256_SALT_SIZE]={0};
+	u8 format[10]=CONN("%0",SHA256_SALT_SIZE,"d");
 	printf("format:%s",format);
 	sprintf(buf,format,random);
 	printf("random:%d\n",random);
