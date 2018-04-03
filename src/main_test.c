@@ -32,7 +32,7 @@ main(int argc, char **argv)
         printf("please input a string:\n");
         u8 in[100];
         scanf("%s", in);
-        if(strcmp("next",in)){
+        if(strcmp("next",in)==0){
             break;
         }
         printf("in  string:%s\n", in);
@@ -49,7 +49,7 @@ main(int argc, char **argv)
         printf("out with salt string:%s\n",out);
         printf("out with salt    len:%d\n",strlen(out));
     }
-
+    printf("start test spend time of 20000 sha256\n");
     int i =0;
     struct timespec start = {0, 0};
     u8 testSrc[15]="sha256seed";
@@ -57,11 +57,11 @@ main(int argc, char **argv)
     generateSalt(testSalt, sizeof(testSalt)-1);
     clock_gettime(CLOCK_MONOTONIC, &start);
     u8 testOut[SHA256_BLOCK_SIZE*2];
-    for(i;i<2000;i++){
+    for(i;i<20000;i++){
         sha256_salt(testSrc, strlen(testSrc),testOut,strlen(testOut),testSalt,strlen(testSalt));
     }
     struct timespec end = {0, 0};
     clock_gettime(CLOCK_MONOTONIC, &end);
-    printf("spend time:%dns",end.tv_nsec-start.tv_nsec);
+    printf("spend time:%dns\n",end.tv_nsec-start.tv_nsec);
     return 0;
 }
