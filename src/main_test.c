@@ -41,7 +41,9 @@ main(int argc, char **argv)
         generateSalt(salt, sizeof(salt)-1);
         printf("salt:%s\nsalt len:%d\n",salt, sizeof(salt)-1);
         sha256_salt(in,inLen,out,sizeof(out)-1,salt,sizeof(salt)-1);
-        printf("out string with salt:%s",out);
+        printf("out with salt string:%s\n",out);
+        printf("out with salt    len:%d\n",sizeof(out)-1);
+
 
     }
     return 0;
